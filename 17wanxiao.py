@@ -426,18 +426,22 @@ def run():
         if not check_dict:
             return
         else:
-            length = len(check['post_dict'].get('checkbox'))
-                    if length != 27:
-                        return
-            if check['post_dict'].get('checkbox'):
-                for i in check['post_dict'].get('checkbox'):
-                    if i['value'] is None:
-                        i['value'] = '否'
-            if check['check_json']['jsonData'].get('updatainfo'):
-                for i in check['check_json']['jsonData'].get('updatainfo'):
-                    if i['value'] is None:
-                        i['value'] = '否'
             for check in check_dict:
+
+                length = len(check['post_dict'].get('checkbox'))
+                if length != 27:
+                    return  
+                    
+                if check['post_dict'].get('checkbox'):
+                    for i in check['post_dict'].get('checkbox'):
+                        if i['value'] is None:
+                            i['value'] = '否'
+                            
+                if check['check_json']['jsonData'].get('updatainfo'):
+                    for i in check['check_json']['jsonData'].get('updatainfo'):
+                        if i['value'] is None:
+                            i['value'] = '否'
+                        
                 if check['post_dict'].get('checkbox'):
                     post_msg = "\n".join(
                         [f"| {i['description']} | {i['value']} |" for i in check['post_dict'].get('checkbox')])
