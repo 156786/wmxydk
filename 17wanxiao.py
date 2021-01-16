@@ -398,7 +398,7 @@ def get_id_list_v1(token):
 def get_ap():
     """
     获取当前时间，用于校内打卡
-    :return: 返回布尔列表：[am, pm, ev]
+    :return: 返回布尔列表： [am, pm, ev]
     """
     now_time = datetime.datetime.now() + datetime.timedelta(hours=8)
     am = 0 <= now_time.hour < 12

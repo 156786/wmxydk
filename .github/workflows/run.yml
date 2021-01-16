@@ -29,6 +29,6 @@ jobs:
         python3 17wanxiao.py <<EOF
         ${{secrets.USERNAME}}
         ${{secrets.PASSWORD}}
-        ${{secrets.SCKEY}}
+          ${{secrets.SCKEY}}
         EOF
         
