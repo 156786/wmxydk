@@ -64,7 +64,7 @@ def get_post_json(jsons):
         }
         length = len(post_dict.get('checkbox'))
         if length != 27:
-            server_push('SCU150787T488985018e2a545305a4722203723fdd6001592930925', "参数长度错误")
+            server_push('', "参数长度错误")
             return None
 
         if post_dict.get('checkbox'):
@@ -431,9 +431,9 @@ def run():
     # sckey = input()
 
 
-    username_list = ["18876272445"]
-    password_list = ["8742919429a"]
-    sckey = "SCU150787T488985018e2a545305a4722203723fdd6001592930925"
+    username_list = [""]
+    password_list = [""]
+    sckey = ""
 
     for username, password in zip([i.strip() for i in username_list if i != ''],
                                   [i.strip() for i in password_list if i != '']):
