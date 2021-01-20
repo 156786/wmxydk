@@ -62,6 +62,15 @@ def get_post_json(jsons):
             "checkbox": [{"description": i["decription"], "value": i["value"]} for i in
                          data['cusTemplateRelations']],
         }
+        length = len(post_dict.get('checkbox'))
+        if length != 27:
+            server_push('SCU150787T488985018e2a545305a4722203723fdd6001592930925', "参数长度错误")
+            return None
+
+        if post_dict.get('checkbox'):
+            for i in post_dict.get('checkbox'):
+                if i['value'] is None:
+                    i['value'] = '否'
         # print(json.dumps(post_dict, sort_keys=True, indent=4, ensure_ascii=False))
         logging.info('获取完美校园打卡post参数成功')
         return post_dict
@@ -410,16 +419,22 @@ def get_ap():
 def run():
     initLogging()
     now_time = datetime.datetime.now()
-    bj_time = now_time + datetime.timedelta(hours=8)
+    bj_time = now_time
     log_info = [f"""
 ------
 #### 现在时间：
 ```
 {bj_time.strftime("%Y-%m-%d %H:%M:%S %p")}
 ```"""]
-    username_list = input().split(',')
-    password_list = input().split(',')
-    sckey = input()
+    # username_list = input().split(',')
+    # password_list = input().split(',')
+    # sckey = input()
+
+
+    username_list = ["18876272445"]
+    password_list = ["8742919429a"]
+    sckey = "SCU150787T488985018e2a545305a4722203723fdd6001592930925"
+
     for username, password in zip([i.strip() for i in username_list if i != ''],
                                   [i.strip() for i in password_list if i != '']):
         check_dict = check_in(username, password)
@@ -427,21 +442,6 @@ def run():
             return
         else:
             for check in check_dict:
-
-                length = len(check['post_dict'].get('checkbox'))
-                if length != 27:
-                    return  
-                    
-                if check['post_dict'].get('checkbox'):
-                    for i in check['post_dict'].get('checkbox'):
-                        if i['value'] is None:
-                            i['value'] = '否'
-                            
-                if check['check_json']['jsonData'].get('updatainfo'):
-                    for i in check['check_json']['jsonData'].get('updatainfo'):
-                        if i['value'] is None:
-                            i['value'] = '否'
-                        
                 if check['post_dict'].get('checkbox'):
                     post_msg = "\n".join(
                         [f"| {i['description']} | {i['value']} |" for i in check['post_dict'].get('checkbox')])
